@@ -8,8 +8,8 @@ import 'components/header.dart';
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      body: Container(
         color: Colors.blue.shade50,
         child: Column(
           children: [

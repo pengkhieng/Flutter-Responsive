@@ -16,7 +16,7 @@ class PaddingScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Padding"),
         leading: GestureDetector(
-          onTap: () => menuController.selectedIndex(0),
+          onTap: () => menuController.changeIndex(0),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             decoration: BoxDecoration(

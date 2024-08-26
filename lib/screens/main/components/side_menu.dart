@@ -16,30 +16,45 @@ class SideMenu extends StatefulWidget {
 class _SideMenuState extends State<SideMenu> {
   final MenuAppController menuController = Get.find();
   bool isDropDown = false;
+  bool isActive = false;
+
+  void _onMenuItemPressed(int index) {
+    setState(() {
+      menuController.changeIndex(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(0), bottomRight: Radius.circular(0)),
+      ),
       backgroundColor: Colors.white,
       child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
         physics: BouncingScrollPhysics(),
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Image.asset("assets/images/logo.png"),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Divider(
-              color: Colors.grey.shade200,
-            ),
+          Divider(
+            color: Colors.grey.shade200,
           ),
+
 // Index 0
           DrawerListTile(
             title: "ទំព័រដើម",
             svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () => menuController.changeIndex(0),
+            press: () => _onMenuItemPressed(0),
+            isActive: menuController.selectedIndex == 0,
           ),
-          // =========== MARK: -> LIST លំហូរឯកសារ
+          SizedBox(
+            height: 10,
+          ),
+          // =========== MARK: LIST លំហូរឯកសារ
           DrawerListTile(
             title: "លំហូរឯកសារ",
             svgSrc: "assets/icons/menu_tran.svg",
@@ -49,109 +64,185 @@ class _SideMenuState extends State<SideMenu> {
               });
             },
             iconTraling: Icon(
+              color: Colors.red,
               isDropDown
                   ? Icons.arrow_upward_rounded
                   : Icons.arrow_downward_rounded,
             ),
+            isActive: menuController.selectedIndex == 1 ||
+                menuController.selectedIndex == 2 ||
+                menuController.selectedIndex == 3 ||
+                menuController.selectedIndex == 4 ||
+                menuController.selectedIndex == 5 ||
+                menuController.selectedIndex == 6 ||
+                menuController.selectedIndex == 7 ||
+                menuController.selectedIndex == 8,
           ),
           if (isDropDown) ...[
+            SizedBox(height: 10),
             // Index 1
             DrawerListTile(
               Leading: 10,
               isIconLeading: false,
               title: "រង់ចាំ",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(1),
+              press: () => _onMenuItemPressed(1),
+              isActive: menuController.selectedIndex == 1,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
+            SizedBox(height: 10),
             // Index 2
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "ដំណើរការ",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(2),
+              press: () => _onMenuItemPressed(2),
+              isActive: menuController.selectedIndex == 2,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
+
+            SizedBox(height: 10),
             // Index 3
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "មិនឯកភាព",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(3),
+              press: () => _onMenuItemPressed(3),
+              isActive: menuController.selectedIndex == 3,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
+            SizedBox(height: 10),
             // Index 4
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "ឯកភាព",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(4),
+              press: () => _onMenuItemPressed(4),
+              isActive: menuController.selectedIndex == 4,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
+            SizedBox(height: 10),
             // Index 5
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "មុខការ",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(5),
+              press: () => _onMenuItemPressed(5),
+              isActive: menuController.selectedIndex == 5,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
-            // No 7
+            SizedBox(height: 10),
+            // Index 6
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "ចែករំលែកលំហូរមកខ្មុំ",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(6),
+              press: () => _onMenuItemPressed(6),
+              isActive: menuController.selectedIndex == 6,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
-            // No 8
+            SizedBox(height: 10),
+            // Index 7
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "កំណត់ត្រាឯកសារ",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(7),
+              press: () => _onMenuItemPressed(7),
+              isActive: menuController.selectedIndex == 7,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
-            // No 2
+            SizedBox(height: 10),
+            // Index 8
             DrawerListTile(
               isIconLeading: false,
               Leading: 10,
               title: "លំហូរដែលបានលុប",
               svgSrc: "assets/icons/menu_task.svg",
-              press: () => menuController.changeIndex(8),
+              press: () => _onMenuItemPressed(8),
+              isActive: menuController.selectedIndex == 8,
+              isSubMenu: true,
+              iconTraling: Icon(
+                color: Colors.red,
+                Icons.arrow_forward,
+              ),
             ),
           ],
-          // =========== MARK END: -> LIST លំហូរឯកសារ
-// No 9
+          // =========== MARK: END LIST លំហូរឯកសារ
+          SizedBox(height: 10),
+// Index 9
           DrawerListTile(
             title: "ឯកសារគម្រូ",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () => menuController.changeIndex(9),
+            press: () => _onMenuItemPressed(9),
+            isActive: menuController.selectedIndex == 9,
           ),
 
-// No 10
+          SizedBox(height: 10),
+// Index 10
           DrawerListTile(
             title: "រចនាសម្ព័ន្ធក្រសួង",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () => menuController.changeIndex(10),
+            press: () => _onMenuItemPressed(10),
+            isActive: menuController.selectedIndex == 10,
           ),
 
-// No 11
+          SizedBox(height: 10),
+// Index 11
           DrawerListTile(
             title: "មតិយេាបល់របស់អ្នកប្រេីប្រាស់",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () => menuController.changeIndex(11),
+            press: () => _onMenuItemPressed(11),
+            isActive: menuController.selectedIndex == 11,
           ),
-// No 12
+          SizedBox(height: 10),
+// Index 12
           DrawerListTile(
             title: "រចនាសម្ព័ន្ធក្រសួង",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () => menuController.changeIndex(12),
+            press: () => _onMenuItemPressed(12),
+            isActive: menuController.selectedIndex == 12,
           ),
-// No 13
+          SizedBox(height: 10),
+// Index 13
           DrawerListTile(
             title: "កំណត់ប្រព័ន្ធ",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () => menuController.changeIndex(13),
+            press: () => _onMenuItemPressed(13),
+            isActive: menuController.selectedIndex == 13,
           ),
         ],
       ),
@@ -159,7 +250,7 @@ class _SideMenuState extends State<SideMenu> {
   }
 }
 
-class DrawerListTile extends StatelessWidget {
+class DrawerListTile extends StatefulWidget {
   DrawerListTile({
     Key? key,
     // For selecting those three line once press "Command+D"
@@ -169,6 +260,8 @@ class DrawerListTile extends StatelessWidget {
     this.iconTraling,
     this.isIconLeading = true,
     this.Leading = 0,
+    this.isActive = false,
+    this.isSubMenu = false,
   }) : super(key: key);
 
   final String title, svgSrc;
@@ -176,42 +269,54 @@ class DrawerListTile extends StatelessWidget {
   final bool isIconLeading;
   final Icon? iconTraling;
   final double Leading;
+  final bool isActive;
+  final bool isSubMenu;
+
+  @override
+  State<DrawerListTile> createState() => _DrawerListTileState();
+}
+
+class _DrawerListTileState extends State<DrawerListTile> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
+    return InkWell(
+      onTap: widget.press,
+      splashColor: Colors.blueGrey.shade200,
+      hoverColor: Colors.blueGrey.shade50,
+      borderRadius: BorderRadius.circular(10.0),
       child: Container(
+        decoration: BoxDecoration(
+            color: widget.isActive
+                ? (widget.isSubMenu ? Colors.blue[100] : Colors.blue[900])
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(10)),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        color: Colors.transparent,
         child: Row(
           children: [
-            SizedBox(
-              width: Leading,
-            ),
-            if (isIconLeading) ...[
+            if (widget.isIconLeading)
               SvgPicture.asset(
-                svgSrc,
-                colorFilter:
-                    ColorFilter.mode(Colors.blueGrey.shade400, BlendMode.srcIn),
+                widget.svgSrc ?? '',
+                colorFilter: ColorFilter.mode(
+                  Colors.blueGrey.shade400,
+                  BlendMode.srcIn,
+                ),
                 height: 16,
               ),
-              SizedBox(
-                width: 10,
-              )
-            ],
+            SizedBox(width: 10),
             Expanded(
               child: Text(
-                title,
-                style: TextStyle(color: Colors.blueGrey.shade400),
+                widget.title,
+                style: TextStyle(
+                  color: Colors.blueGrey.shade400,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            if (iconTraling != null)
-              Container(
-                color: Colors.red,
-                child: iconTraling,
-              )
+            if (widget.iconTraling != null) ...[
+              SizedBox(width: 10),
+              widget.iconTraling ?? Container()
+            ]
           ],
         ),
       ),
